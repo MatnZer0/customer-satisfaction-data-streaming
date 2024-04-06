@@ -24,8 +24,8 @@ variables_file_path = '/terraform/variables.tf'
 terraform_variables = read_terraform_variables(variables_file_path)
 
 project_id = terraform_variables[1]['project']['default']
-bucket_name = terraform_variables[5]['gcs_bucket_name']['default']
-data_set_name = terraform_variables[4]['bq_dataset_name']['default']
+bucket_name = terraform_variables[2]['gcs_bucket_name']['default']
+data_set_name = terraform_variables[3]['bq_dataset_name']['default']
 
 schema = StructType([
     StructField("unique_id", StringType()),
