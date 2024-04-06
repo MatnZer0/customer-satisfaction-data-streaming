@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Load the CSV file into memory
 customer_survey_data = pd.read_csv('./Customer_support_data.csv')
