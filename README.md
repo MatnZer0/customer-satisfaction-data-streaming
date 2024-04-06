@@ -38,6 +38,8 @@ Create a GCP project and create a *Service Account* with the following permissio
 - `Storage Object Admin`
 - `Viewer`
 
+  ![alt text](img/service_account_setup.png)
+
 Make sure that these APIs are enabled:
 * https://console.cloud.google.com/apis/library/iam.googleapis.com
 * https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
@@ -46,12 +48,19 @@ Make sure that these APIs are enabled:
 
 Download the Service Account json file, rename it to `google_credentials_project.json` and store it in `$HOME/.google/credentials/` .
 
-## 2. Change terraform/variables.tf up to your GCP Project ID.
+## 2. Change terraform/variables.tf up to your GCP Project ID and unique bucket name.
 
 ```sh
 variable "project" {
   description = "GCP Project ID"
+  #Update the below with your GCP project ID
   default     = "<YOUR PROJECT ID>"
+}
+
+variable "gcs_bucket_name" {
+  description = "My Storage Bucket Name"
+  #Update the below to a unique bucket name
+  default     = "<YOUR UNIQUE BUCKET NAME>"
 }
 ```
 
@@ -73,6 +82,14 @@ variable "project" {
     ```sh
     terraform apply
     ```
+
+  **Note**: If your bucket name is not unique, you will get the error "Error 409: The requested bucket name is not available.", in this case change the bucket name in terraform.ft and start again from the **Initialize terraform** step.
+
+Once you have provisioned the infrastructure, your dataset should already be visible in BigQuery:
+
+![alt text](img/created_dataset_example.png)
+
+Now let's ingest the data.
 
 ## 4. Start the docker containers:
 * **cd back to the main project folder**:
@@ -107,7 +124,12 @@ variable "project" {
 
   ![alt text](img/query_example.png)
 
-  **Note**: Adapt the query with your respective GCP project id and dataset name.
+  **Note**: Adapt the query with your respective GCP project id.
+
+* **Stop containers**:
+	```sh
+	 docker compose down
+  ```
 
 # Dashboard
 
