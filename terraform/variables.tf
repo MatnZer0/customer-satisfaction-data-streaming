@@ -5,8 +5,8 @@ variable "credentials" {
 
 
 variable "project" {
-  description = "Project"
-  default     = "example-setup-project-3"
+  description = "GCP Project ID"
+  default     = "<YOUR PROJECT ID>"
 }
 
 variable "region" {

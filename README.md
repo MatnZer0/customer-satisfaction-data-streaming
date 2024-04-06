@@ -48,6 +48,13 @@ Download the Service Account json file, rename it to `google_credentials_project
 
 ## 2. Change terraform/variables.tf up to your GCP Project ID.
 
+```sh
+variable "project" {
+  description = "GCP Project ID"
+  default     = "<YOUR PROJECT ID>"
+}
+```
+
 ## 3. Set up Infrastructure using Terraform:
 
 * **Go to the `/terraform` folder**:
@@ -89,8 +96,8 @@ Download the Service Account json file, rename it to `google_credentials_project
   * **Zookeeper container**: Handle the connection between Kafka and other containers.
   * **Spark container**: Acts as a consumer of the data stream. It reads the events in the "messages" topic, performs transformations using PySpark and connects to GCP.
 
-  Wait for a while as Spark can take a few minutes to start. 
-  After that all the data should appear in the BigQuery dataset, ready to be queried and analysed.
+  Wait a while as Spark can take a few minutes to start. 
+  The data should then start to be ingested into the "customer_survey_dataset" on the "survey-stream" table, ready to be queried and analysed.
   
   **Note**: Because the producer generates a stream of data in real time, all data generated is based on the current date, and queries and graphs based on long time periods may require the container to run for a long period of time to work.
 
